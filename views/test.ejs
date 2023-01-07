@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.46.1/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body class="h-screen">
+    <h1 class="px-4 py-4 text-5xl">Kanban Board</h1>
+    <!-- grid grid-cols-3 gap-4 -->
+    <!-- flex flex-row flex-wrap -->
+    <section class="cardDisplay px-4 py-4 container flex flex-row flex-wrap ">
+        <% cards.forEach(card => { %>
+            <section class='card-body shadow-xl border-1 border-slate-800 rounded-3xl grow-0 w-1/2' data-id='<%=card._id%>'>
+
+                <section class="border border-slate-800">
+                    <section class="card__header">
+                        <h3 class="card__title text-3xl border border-slate-800 rounded-t-lg"><%=card.cardName%></h3>                    
+                    </section>
+                    <!-- <section class="card__subheader">
+                        <form action="/todos/createTodo" method='POST'>
+                            <input type="text" style='display:none;' readonly name="cardSelect"/>
+                            <input type="text" class="card_todo__input" name="todoItem"  placeholder="Enter Todo Item" data-cardid='<%=card._id%>' data-username='<%= user.userName %>' />
+                            <input type="btn submit" value="Add Todo">
+                        </form>
+                    </section> -->
+                    <section class="card__body">
+                        <% card.todos && card.todos.forEach(todo => { %>
+                            <li class='todoItem' data-id='<%=todo._id%>'>
+                                <span class='<%= todo.completed === true ? 'completed' : 'not'%>'><%= todo.todo %></span>
+                                <div class="card-actions"><button class='del rounded-full border-1 border-rose-600 btn'> Delete </button></div>
+                            </li>
+                        <% })%>
+                    </section>
+    
+                    <section class="mx-auto w-full border-y border-y-slate-300 py-5">
+                        <h3 class="text-center"><%= user.userName %> has <%= card.todos ? card.todos.filter(todo => todo.completed === false).length : 0 %> things left to do.</h3>
+                    </section>
+    
+                    <section class="mx-auto">
+                        <a href="/cards/deleteCard/<%=card._id%>"> <button class="btn mx-auto">Delete this card</button></a>
+                    </section>
+
+                </section>
+                
+            </section>
+        <% }) %>
+    </section>
+
+
+    <!-- Adding Form -->
+    <section class="px-5 py-10">
+        <div class="flex-grow border-t border-gray-400"></div>
+    </section>
+    <!-- //grid gap-4 -->
+    <section class="ml-10 px-10 border border-slate-800 rounded lg w-fit flex flex-col items-center">
+        <div class="flex flex-col items-center">
+            <form action="/todos/createTodo" method='POST' class="py-5">
+                <input type="text" placeholder="Enter Todo Item" name='todoItem' class="input input-bordered w-full max-w-xs ">
+                <select name="cardSelect" id="cardSelect" class="select select-bordered w-fit max-w-xs">
+                    <% cards.forEach(card => { %>
+                        <option value="<%= card._id %>"><%= card.cardName %></option>
+                    <% }) %>
+                </select>
+                <input type="submit" class="input input-bordered">
+            </form>
+        </div>
+        
+        <div>
+            <form action="/cards/createCard" method="post" class="py-5">
+                <input type="text" name="cardName" placeholder="New Card Name" class="input input-bordered w-full max-w-xs">
+                <input type="submit" value="New Card" class="class="input input-bordered"">
+            </form>
+        </div>
+        
+        
+    </section>
+
+    <section class="px-5 py-10 flex flex-col items-center">
+        <a class="btn btn-bordered" href="/logout">Logout</a>
+        <div class="pt-5"></div>
+    </section>
+    
+
+    <script src="js/main.js"></script>
+</body>
+</html>
