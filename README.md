@@ -3,7 +3,7 @@
 A kanban board made with the bones of the Leon todo app. The kanban bord has user login and utilizes MVC principals in mind.
 <!-- ![App Overview](img\App_Overview.jpg) -->
 <p align="center">
-  <img src="img\App_Overview.jpg" alt="drawing" width="500"/>
+  <img src="img\App_Overview.jpg" alt="App_Overview"/>
 </p>
 
 ---
