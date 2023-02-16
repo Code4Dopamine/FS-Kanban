@@ -18,17 +18,21 @@
     />
   </head>
   <body>
-    <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-    <div class="alert alert-danger"><%= el.msg %></div>
-    <% }) %> <% } %> <% if (locals.messages.info) { %> <% messages.info.forEach(
-    el => { %>
-    <div class="alert alert-danger"><%= el.msg %></div>
-    <% }) %> <% } %>
-
-    <form action="/login" method="POST">
-      <input type="email" name="email" placeholder="Email" />
-      <input type="password" name="password" placeholder="Password" />
-      <input type="submit" />
-    </form>
+    <div class="hero min-h-screen">
+      <div class="hero-content text-center">
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <% messages.info.forEach(
+        el => { %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %>
+    
+        <form action="/login" method="POST">
+          <input type="email" name="email" placeholder="Email" />
+          <input type="password" name="password" placeholder="Password" />
+          <input class="btn btn-primary" type="submit" />
+        </form>
+      </div>
+    </div>
   </body>
 </html>
